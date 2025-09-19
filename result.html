@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <div class="alert alert-{{ alert_class }} d-flex align-items-center" role="alert">
+      <div>
+        <h4 class="alert-heading">{{ result }}</h4>
+        <p class="mb-0">Probabilities: Low={{ probs[0] }}, Moderate={{ probs[1] }}, High={{ probs[2] }}</p>
+      </div>
+      <div class="ms-auto">
+        <img src="{{ url_for('static', filename=image) }}" width="120">
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5>Suggestions & Precautions</h5>
+        <ul>
+          {% for s in suggestions %}
+            <li>{{ s }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h5>Health Images</h5>
+        <div class="d-flex gap-3">
+          <img src="{{ url_for('static', filename='heart.png') }}" width="80">
+          <img src="{{ url_for('static', filename='blood_pressure.png') }}" width="80">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card text-center p-3">
+      <img src="{{ url_for('static', filename=avatar) }}" width="140" class="rounded-circle mb-3">
+      <h5>{{ patient_name }}</h5>
+      <p class="mb-1"><strong>Gender:</strong> {{ gender }}</p>
+      <p class="mb-1"><strong>Age:</strong> {{ age }}</p>
+      <p class="mb-1"><strong>Diet:</strong> {{ diet }}</p>
+      <p class="mb-1"><strong>History:</strong> {{ history }}</p>
+      <a href="/" class="btn btn-secondary mt-3">New Prediction</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
